@@ -1,14 +1,14 @@
-const MAX_DICES = 5
+const MAX_DICE = 5
 
 
-function genereateNewDiceNumbers(maximumDices = 1) {
+function genereateNewDiceNumbers(maximumDice = 1) {
     let dices = [];
-    for (let dice = 1; dice <= maximumDices; dice++) {
+    for (let die = 1; die <= maximumDice; die++) {
 
-        const diceNumber = Math.floor(Math.random() * 6) + 1;
-        document.getElementById("dice-" + (dice)).className = "dice-" + (diceNumber);
+        const dieNumber = Math.floor(Math.random() * 6) + 1;
+        document.getElementById("dice-" + (die)).className = "dice-" + (dieNumber);
 
-        dices.push(diceNumber);
+        dices.push(dieNumber);
     }
 
     return dices;
@@ -16,7 +16,7 @@ function genereateNewDiceNumbers(maximumDices = 1) {
 
 // Roll dice when button is clicked
 document.getElementById("rollDice").onclick = () => {
-    let dices = genereateNewDiceNumbers(MAX_DICES);
+    let dices = genereateNewDiceNumbers(MAX_DICE);
 
     if (checkFullHouse(dices)) {
         console.log("You got fullhouse");
@@ -31,36 +31,36 @@ document.getElementById("calculateGame").onclick = () => {
     countYatzyPoints();
 }
 
-function checkFullHouse(dices = [3, 3, 1, 1, 1]) {
+function checkFullHouse(dice = [3, 3, 1, 1, 1]) {
 
-    const maxDicesOfSameValue = 3;
-    let compareTempDices = {};
-    let sumOfSameDices = 0;
+    const maxDiceOfSameValue = 3;
+    let compareTempDice = {};
+    let sumOfSameDice = 0;
 
-    for (dice of dices) {
-        if (Object.keys(compareTempDices)[0] === undefined) {
-            compareTempDices[dice] = 1
+    for (die of dice) {
+        if (Object.keys(compareTempDice)[0] === undefined) {
+            compareTempDice[die] = 1
             continue;
-        } else if (Object.keys(compareTempDices)[0] == String(dice)) {
-            if (compareTempDices[dice] < maxDicesOfSameValue) {
-                compareTempDices[dice]++;
+        } else if (Object.keys(compareTempDice)[0] == String(die)) {
+            if (compareTempDice[die] < maxDiceOfSameValue) {
+                compareTempDice[die]++;
             }
             continue;
         }
 
-        if (Object.keys(compareTempDices)[1] === undefined) {
-            compareTempDices[dice] = 1
+        if (Object.keys(compareTempDice)[1] === undefined) {
+            compareTempDice[die] = 1
             continue;
-        } else if (Object.keys(compareTempDices)[1] === String(dice)) {
-            if (compareTempDices[dice] < maxDicesOfSameValue) {
-                compareTempDices[dice]++;
+        } else if (Object.keys(compareTempDice)[1] === String(die)) {
+            if (compareTempDice[die] < maxDiceOfSameValue) {
+                compareTempDice[die]++;
             }
         }
 
     }
 
-    sumOfSameDices = compareTempDices[Object.keys(compareTempDices)[0]] + compareTempDices[Object.keys(compareTempDices)[1]];
-    if (sumOfSameDices == MAX_DICES) {
+    sumOfSameDice = compareTempDice[Object.keys(compareTempDice)[0]] + compareTempDice[Object.keys(compareTempDice)[1]];
+    if (sumOfSameDice == MAX_DICE) {
         return true;
     } else {
         return false;
